@@ -1,70 +1,58 @@
-# Getting Started with Create React App
+# Money Manager
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Money Manager is a lightweight personal finance dashboard for tracking income and expenses. Transactions are saved in your browser, so your data stays on the device and browser where you entered it.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- View your total balance, income, and expenses.
+- Review monthly income, expenses, net savings, and savings rate.
+- Browse transactions by month and filter by income or expense.
+- Search transaction descriptions and categories.
+- Add, edit, and delete transactions with a description, amount, type, category, and date.
+- Import and export transaction data as CSV for backups or moving data.
+- View an income and expense chart for the selected month.
 
-### `npm start`
+## Requirements
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Node.js and npm
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Run locally
 
-### `npm test`
+Install the dependencies and start the development server:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+npm install
+npm start
+```
 
-### `npm run build`
+The app opens at [http://localhost:3000](http://localhost:3000).
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Create a production build with:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+npm run build
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## CSV import and export
 
-### `npm run eject`
+Export downloads a CSV containing all transactions. To import a CSV, include these column headers:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+| Column | Required | Description |
+| --- | --- | --- |
+| `description` | Yes | Transaction name or note |
+| `amount` | Yes | Positive numeric amount |
+| `type` | Yes | `income` or `expense` |
+| `category` | No | Transaction category; defaults to `Other` |
+| `date` | No | Transaction date; missing or invalid dates use the import date |
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Import validates the file before adding its transactions. It adds imported entries to the existing list; it does not replace existing data.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Data and privacy
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Transactions are stored in the browser's `localStorage`. Clearing site data or using a different browser or device will not carry those transactions over. Export a CSV backup before clearing browser data.
 
-## Learn More
+## Technology
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- React 18 with Create React App
+- Chakra UI
+- ApexCharts
