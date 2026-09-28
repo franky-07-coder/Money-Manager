@@ -1,38 +1,52 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#root { min-height: 100vh; }
+.dashboard-shell { max-width: 1180px; margin: 0 auto; padding: 32px 34px 24px; }
+.topbar { margin-bottom: 44px; }
+.topbar-actions { flex-wrap: wrap; justify-content: flex-end; }
+.brand-mark { width: 44px; height: 44px; background: #e8f0ff; color: #3563e9; border-radius: 14px; }
+.eyebrow { font-size: 10px; letter-spacing: .13em; font-weight: 700; color: #8c96a8; }
+.welcome-row { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; }
+.date-pill { color: #657087; font-size: 13px; border: 1px solid #e8ebf2; border-radius: 999px; padding: 9px 14px; background: #fff; }
+.metric-card, .report-panel, .chart-panel, .transactions-panel { background: #fff; border: 1px solid #e9edf4; border-radius: 18px; box-shadow: 0 5px 20px rgba(36, 54, 89, .035); }
+.report-panel { padding: 21px 24px 18px; }
+.report-stat { padding: 13px 15px; border-radius: 12px; background: #f8f9fc; }
+.report-number { color: #253149; font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 20px; margin-top: 6px; }
+.income-number { color: #1b9b66; }
+.expense-number { color: #e66d68; }
+.month-controls button { min-width: 36px; font-size: 20px; color: #66738b; }
+.metric-card { padding: 23px 24px; min-height: 142px; }
+.balance-card { background: linear-gradient(130deg, #315fe7, #5279f1); border: 0; color: white; }
+.metric-label, .legend-label { font-size: 10px; letter-spacing: .1em; font-weight: 700; color: #8993a5; }
+.balance-card .metric-label, .balance-card .metric-note { color: rgba(255,255,255,.75); }
+.balance-value { color: white; font-size: 28px !important; margin-top: 8px; }
+.metric-value { color: #253149; font-size: 25px !important; margin-top: 13px; }
+.metric-note { color: #99a1b0; font-size: 12px; margin-top: 7px; }
+.metric-icon { width: 38px; height: 38px; border-radius: 12px; align-items: center; justify-content: center; }
+.balance-icon { background: rgba(255,255,255,.18); color: white; }
+.income-icon { color: #18a66a; background: #e8f8f0; }
+.expense-icon { color: #ef6464; background: #fff0ef; }
+.chart-panel { padding: 20px 24px 18px; }
+.period-tag { color: #8290a5; background: #f4f6fa; border-radius: 7px; padding: 5px 8px; font-size: 9px; font-weight: 700; letter-spacing: .08em; }
+.legend-dot { width: 9px; height: 9px; border-radius: 50%; }
+.income-dot { background: #4973ec; }
+.expense-dot { background: #fa817a; }
+.legend-label { font-size: 9px; }
+.transactions-panel { padding: 24px; }
+.filter-pills { background: #f5f7fa; border-radius: 10px; padding: 3px; }
+.transaction-row { border-top: 1px solid #f0f2f6; padding: 14px 4px; }
+.transaction-icon { width: 38px; height: 38px; border-radius: 12px; flex-shrink: 0; }
+.income-row-icon { background: #e9f8f0; color: #1da66d; }
+.expense-row-icon { background: #fff0ef; color: #e86a64; }
+.category-badge { font-weight: 500 !important; text-transform: none !important; background: #f2f4f8 !important; color: #758095 !important; border-radius: 5px !important; }
+.empty-state { padding: 36px 16px 28px; text-align: center; }
+.empty-icon { width: 54px; height: 54px; border-radius: 18px; background: #f1f5ff; color: #6686e7; }
+.footer-note { text-align: center; font-size: 11px; color: #a4abba; margin-top: 22px; }
+@media (max-width: 600px) {
+  .dashboard-shell { padding: 20px 15px; }
+  .topbar { margin-bottom: 34px; }
+  .topbar button { font-size: 12px; padding-inline: 12px; }
+  .topbar-actions { gap: 6px; }
+  .welcome-row { align-items: start; flex-direction: column; }
+  .welcome-row h2 { font-size: 22px; }
+  .metric-card { padding: 19px; min-height: 126px; }
+  .transactions-panel, .chart-panel, .report-panel { padding: 18px 15px; }
 }

@@ -1,45 +1,69 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useMemo, useState } from "react";
 
 export const GlobalContext = createContext(null);
+const STORAGE_KEY = "money-manager-transactions";
 
 export default function GlobalState({ children }) {
-  const [formData, setFormData] = useState({
-    type: "income",
-    amount: 0,
-    description: "",
+  const [allTransactions, setAllTransactions] = useState(() => {
+    try {
+      const saved = window.localStorage.getItem(STORAGE_KEY);
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
   });
 
-  const [value, setValue] = useState("expense");
-  const [totalExpense, setTotalExpense] = useState(0);
-  const [totalIncome, setTotalIncome] = useState(0);
-  const [allTransactions, setAllTransactions] = useState([]);
+  useEffect(() => {
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(allTransactions));
+  }, [allTransactions]);
 
-  function handleFormSubmit(currentFormData) {
-    if (!currentFormData.description || !currentFormData.amount) return;
+  const { totalIncome, totalExpense } = useMemo(
+    () =>
+      allTransactions.reduce(
+        (totals, transaction) => {
+          const amount = Number(transaction.amount) || 0;
+          if (transaction.type === "income") totals.totalIncome += amount;
+          else totals.totalExpense += amount;
+          return totals;
+        },
+        { totalIncome: 0, totalExpense: 0 }
+      ),
+    [allTransactions]
+  );
 
-    setAllTransactions([
-      ...allTransactions,
-      { ...currentFormData, id: Date.now() },
+  function handleFormSubmit(transaction) {
+    const amount = Number(transaction.amount);
+    const description = transaction.description.trim();
+    if (!description || !Number.isFinite(amount) || amount <= 0) return false;
+
+    setAllTransactions((current) => [
+      { ...transaction, amount, description, date: new Date().toISOString(), id: `${Date.now()}-${Math.random()}` },
+      ...current,
     ]);
+    return true;
   }
 
-  console.log(allTransactions);
+  function updateTransaction(id, transaction) {
+    const amount = Number(transaction.amount);
+    const description = transaction.description.trim();
+    if (!description || !Number.isFinite(amount) || amount <= 0) return false;
+    setAllTransactions((current) => current.map((item) => item.id === id
+      ? { ...item, ...transaction, amount, description }
+      : item));
+    return true;
+  }
+
+  function importTransactions(transactions) {
+    setAllTransactions((current) => [...transactions, ...current]);
+  }
+
+  function deleteTransaction(id) {
+    setAllTransactions((current) => current.filter((item) => item.id !== id));
+  }
 
   return (
     <GlobalContext.Provider
-      value={{
-        formData,
-        setFormData,
-        totalExpense,
-        setTotalExpense,
-        totalIncome,
-        setTotalIncome,
-        value,
-        setValue,
-        allTransactions,
-        setAllTransactions,
-        handleFormSubmit,
-      }}
+      value={{ allTransactions, totalIncome, totalExpense, handleFormSubmit, updateTransaction, importTransactions, deleteTransaction }}
     >
       {children}
     </GlobalContext.Provider>
